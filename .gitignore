@@ -13,3 +13,9 @@
 
 # shadow-cljs cache, port files
 /.shadow-cljs/
+
+
+# gtags
+/GPATH
+/GRTAGS
+/GTAGS
