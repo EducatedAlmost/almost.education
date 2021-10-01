@@ -1,0 +1,14 @@
+body {
+    background-color: #010022;
+    color: #debede;
+}
+
+body.dark {
+    background-color: #010022 !important;
+    color: #debede !important;
+}
+
+body.light {
+    color: #010022 !important;
+    background-color: #debede !important;
+}
