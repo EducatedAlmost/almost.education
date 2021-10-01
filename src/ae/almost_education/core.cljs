@@ -5,9 +5,7 @@
    [ae.almost-education.events :as events]
    [ae.almost-education.routes :as routes]
    [ae.almost-education.views :as views]
-   [ae.almost-education.config :as config]
-   ))
-
+   [ae.almost-education.config :as config]))
 
 (defn dev-setup []
   (when config/debug?

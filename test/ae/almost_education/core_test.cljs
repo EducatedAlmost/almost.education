@@ -2,6 +2,6 @@
   (:require [cljs.test :refer-macros [deftest testing is]]
             [ae.almost-education.core :as core]))
 
-(deftest fake-test
-  (testing "fake description"
-    (is (= 1 2))))
+#_(deftest fake-test
+    (testing "fake description"
+      (is (= 1 2))))

@@ -11,3 +11,8 @@
  ::active-panel
  (fn [db _]
    (:active-panel db)))
+
+(re-frame/reg-sub
+ ::light-mode?
+ (fn [db _]
+   (:light-mode? db)))
