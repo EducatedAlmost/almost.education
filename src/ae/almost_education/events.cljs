@@ -19,20 +19,13 @@
  (fn-traced [{:keys [db]} [_ active-panel]]
             {:db (assoc db :active-panel active-panel)}))
 
-(defn handle-light-mode-changed [db checked?]
-  (assoc db :light-mode? checked?))
-;; (handle-light-mode-changed {:light-mode? false} true)
-
-;; (re-frame/reg-event-fx
-;;  ::light-mode-changed-to
-;;  (fn-traced [{:keys [db] :as cofx} [_ checked?]]
-;;             (let [new-db (handle-light-mode-changed db checked?)]
-;;               (assoc cofx :db new-db))))
+(defn handle-light-mode-changed [{:keys [db] :as cofx} checked?]
+  (let [new-db (assoc db :light-mode? checked?)]
+    (assoc cofx
+           :light-mode? checked?
+           :db new-db)))
 
 (re-frame/reg-event-fx
  ::light-mode-changed-to
- (fn-traced [{:keys [db] :as cofx} [_ checked?]]
-            (let [new-db (assoc db :light-mode? checked?)]
-              (assoc cofx
-                     :light-mode? checked?
-                     :db new-db))))
+ (fn-traced [cofx [_ checked?]]
+            (handle-light-mode-changed cofx checked?)))
