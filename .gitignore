@@ -14,8 +14,13 @@
 # shadow-cljs cache, port files
 /.shadow-cljs/
 
-
 # gtags
 /GPATH
 /GRTAGS
 /GTAGS
+
+# LSP
+/.lsp/
+
+# clj-kondo
+/.clj-kondo/
