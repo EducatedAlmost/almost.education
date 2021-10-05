@@ -1,6 +1,7 @@
 body {
     background-color: #010022;
     color: #debede;
+    text-align: center;
 }
 
 body.dark {
@@ -11,4 +12,18 @@ body.dark {
 body.light {
     color: #010022 !important;
     background-color: #debede !important;
+}
+
+.centre {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#toggle {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#header-padding {
+    margin-top: 20px;
 }
