@@ -1,0 +1,23 @@
+version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - amplifyPush --simple
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm install
+        - mkdir -p target
+        - cp -R resources/* target/
+    build:
+      commands:
+        - npx shadow-cljs release release
+  artifacts:
+    baseDirectory: target
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
