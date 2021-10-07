@@ -12,7 +12,7 @@ frontend:
         - java -version
         - npm install
         - mkdir -p target
-        - cp -R resources/* target/
+        - cp -R resources/public/* target/
     build:
       commands:
         - npx shadow-cljs release release

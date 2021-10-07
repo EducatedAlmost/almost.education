@@ -36,7 +36,7 @@
                    {day8.re-frame.tracing day8.re-frame.tracing-stubs}}}}
 
   :release {:target     :browser
-            :output-dir "target/public/js/compiled"
+            :output-dir "target/js/compiled"
             :asset-path "/js/compiled"
             :modules {:app {:init-fn ae.almost-education.core/init}}
             :devtools {:preloads [day8.re-frame-10x.preload]}
