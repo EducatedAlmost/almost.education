@@ -15,7 +15,7 @@ frontend:
         - cp -R resources/* target/
     build:
       commands:
-        - npx shadow-cljs release release
+        - npx shadow-cljs release app
   artifacts:
     baseDirectory: target
     files:
