@@ -8,7 +8,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - yum -y install java-1.8.0-amazon-corretto-devel
+        - yum -y install java-1.8.0-openjdk
         - java -version
         - npm install
         - mkdir -p target
