@@ -1,16 +1,16 @@
 body {
-    background-color: #010022;
+    background-color: #1e1e28;
     color: #debede;
     text-align: center;
 }
 
 body.dark {
-    background-color: #010022 !important;
+    background-color: #1e1e28 !important;
     color: #debede !important;
 }
 
 body.light {
-    color: #010022 !important;
+    color: #1e1e28 !important;
     background-color: #debede !important;
 }
 
@@ -30,11 +30,11 @@ a, a:visited, a:hover, a:active {
 }
 
 .react-toggle--checked .react-toggle-track {
-  background-color: #010022;
+  background-color: #1e1e28;
 }
 
 .react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
-  background-color: #010022;
+  background-color: #1e1e28;
 }
 
 .react-toggle--checked .react-toggle-thumb {
