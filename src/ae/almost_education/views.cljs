@@ -30,61 +30,110 @@
  :light-mode?
  set-light-mode)
 
-;; Home
-
 (defn logo []
   (let [light-mode? (re-frame/subscribe [::subs/light-mode?])
         image (clojure.string/join ["/img/ae-logo-" (if @light-mode? "dark-trans.png" "trans.png")])]
-    [:div.centre [:img {:src image :width 400}]]))
+    [:div.centre [:img {:src image :width 400 :max-width "100%"}]]))
 
-(defn home-title []
-  (let [name (re-frame/subscribe [::subs/name])]
-    [re-com/title
-     :src   (at)
-     :label (str "Hello from " @name ". This is the Home Page.")
-     :level :level1
-     :class (styles/level1)]))
+(defn small-logo []
+  (let [light-mode? (re-frame/subscribe [::subs/light-mode?])
+        image (clojure.string/join ["/img/ae-logo-" (if @light-mode? "dark-trans.png" "trans.png")])]
+    [:div.centre [:img {:src image :width 200 :max-width "100%"}]]))
 
-(defn link-to-about-page []
-  [re-com/hyperlink
-   :src      (at)
-   :label    "go to About Page"
-   :on-click #(re-frame/dispatch [::events/navigate :about])])
+(defn title []
+  [:h1 "AlmostEducated"])
+
+;; Home
+
+(defn links []
+  [:div
+   [:h2 [:a {:href "https://blog.almost.education"} "Blog"]]
+   [:h2 [:a {:href "https://github.com/educatedalmost"} "Software"]]
+   [:h2 [:a {:on-click #(re-frame/dispatch [::events/navigate :tutoring])} "Tutoring"]]
+   [:h2 [:a {:on-click #(re-frame/dispatch [::events/navigate :about])} "About"]]])
 
 (defn home-panel []
   [re-com/v-box
-   :src      (at)
-   :gap      "1em"
+   :src (at)
+   :gap "1em"
+   ;; :class (styles/home-box)
    :children [[light-mode-toggle]
               [logo]
-              [home-title]
-              [link-to-about-page]]])
+              [title]
+              [links]
+              #_[link-to-about-page]]])
 
 (defmethod routes/panels :home-panel [] [home-panel])
 
-;; about
+#_(defn link-to-about-page []
+    [re-com/hyperlink
+     :src      (at)
+     :label    "go to About Page"
+     :on-click #(re-frame/dispatch [::events/navigate :about])])
+
+#_(defn home-title []
+    (let [name (re-frame/subscribe [::subs/name])
+          light-mode? (re-frame/subscribe [::subs/light-mode?])]
+      [re-com/title
+       :src   (at)
+     ;; :label (str "Hello from " @name ". This is the Home Page.")
+       :label "Almost Educated"
+       :level :level1
+       :class (styles/home-box)]))
+
+#_(defn home-panel []
+    [re-com/v-box
+     :src      (at)
+     :gap      "1em"
+     :class (styles/home-box)
+     :children [[light-mode-toggle]
+                [logo]
+                [home-title]
+                [link-to-about-page]]])
+
+;; About
 
 (defn about-title []
-  [re-com/title
-   :src   (at)
-   :label "This is the About Page."
-   :level :level1])
+  #_[re-com/title
+     :src   (at)
+     :label "This is the About Page."
+     :level :level1]
+  [:h2 "About"])
 
 (defn link-to-home-page []
-  [re-com/hyperlink
-   :src      (at)
-   :label    "go to Home Page"
-   :on-click #(re-frame/dispatch [::events/navigate :home])])
+  [:a {:on-click #(re-frame/dispatch [::events/navigate :home])} "Home"]
+  #_[re-com/hyperlink
+     :src      (at)
+     :label    "go to Home Page"
+     :on-click #(re-frame/dispatch [::events/navigate :home])])
 
 (defn about-panel []
   [re-com/v-box
    :src      (at)
    :gap      "1em"
    :children [[light-mode-toggle]
-              [about-title]
-              [link-to-home-page]]])
+              [small-logo]
+              [title]
+              [link-to-home-page]
+              [about-title]]])
 
 (defmethod routes/panels :about-panel [] [about-panel])
+
+;; Tutoring
+
+(defn tutoring-title [] [:h2 "Tutoring"])
+
+(defn tutoring-panel []
+  [re-com/v-box
+   :src      (at)
+   :gap      "1em"
+   :children [[light-mode-toggle]
+              [small-logo]
+              [title]
+              [link-to-home-page]
+              [tutoring-title]]])
+
+(defmethod routes/panels :tutoring-panel [] [tutoring-panel])
 
 ;; main
 

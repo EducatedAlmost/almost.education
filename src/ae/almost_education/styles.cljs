@@ -6,6 +6,14 @@
    [garden.units :refer [deg px]]
    [garden.color :refer [rgba]]))
 
+#_(defclass dark []
+    {:color "#debede"
+     :background-color "#010022"})
+
+#_(defclass light []
+    {:color "#010022"
+     :background-color "#debede"})
+
 #_(defcssfn linear-gradient
     ([c1 p1 c2 p2]
      [[c1 p1] [c2 p2]])
@@ -23,14 +31,6 @@
       :background-size     [[(px 100) (px 100)] [(px 100) (px 100)] [(px 20) (px 20)] [(px 20) (px 20)]]
       :background-position [[(px -2) (px -2)] [(px -2) (px -2)] [(px -1) (px -1)] [(px -1) (px -1)]]}])
 
-(defclass level1
-  []
-  {:color :green})
-
-(defclass dark []
-  {:color "#debede"
-   :background-color "#010022"})
-
-(defclass light []
-  {:color "#010022"
-   :background-color "#debede"})
+#_(defclass level1
+    []
+    {:color :green})
