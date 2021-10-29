@@ -14,6 +14,11 @@ body.light {
     background-color: #debede !important;
 }
 
+a, a:visited, a:hover, a:active {
+    color: inherit;
+    font-weight: 300;
+}
+
 .centre {
     width: 80%;
     margin: 0 auto;
