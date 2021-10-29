@@ -17,6 +17,7 @@ body.light {
 a, a:visited, a:hover, a:active {
     color: inherit;
     font-weight: 300;
+    text-decoration: none;
 }
 
 .centre {
