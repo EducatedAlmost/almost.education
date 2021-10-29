@@ -29,6 +29,28 @@ a, a:visited, a:hover, a:active {
     margin-bottom: 10px;
 }
 
+.react-toggle--checked .react-toggle-track {
+  background-color: #010022;
+}
+
+.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: #010022;
+}
+
+.react-toggle--checked .react-toggle-thumb {
+  left: 27px;
+  border-color: #debede;
+}
+
+.react-toggle-track {
+  background-color: #202040;
+}
+
+.react-toggle-thumb {
+  border: 1px solid #debede;
+  background-color: #debede;
+}
+
 #header-padding {
     margin-top: 20px;
 }
