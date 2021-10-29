@@ -43,7 +43,7 @@ a, a:visited, a:hover, a:active {
 }
 
 .react-toggle-track {
-  background-color: #202040;
+  background-color: #1e1e28;
 }
 
 .react-toggle-thumb {
@@ -53,4 +53,8 @@ a, a:visited, a:hover, a:active {
 
 #header-padding {
     margin-top: 20px;
+}
+
+path {
+    fill: #debede;
 }
