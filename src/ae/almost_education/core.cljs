@@ -17,6 +17,7 @@
     (rdom/unmount-component-at-node root-el)
     (rdom/render [views/main-panel] root-el)))
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn init []
   (routes/start!)
   (re-frame/dispatch-sync [::events/initialize-db])
