@@ -33,12 +33,12 @@
 (defn logo []
   (let [light-mode? (re-frame/subscribe [::subs/light-mode?])
         image (clojure.string/join ["/img/ae-logo-" (if @light-mode? "dark-trans.png" "trans.png")])]
-    [:div.centre [:img {:src image :width 400 :max-width "100%"}]]))
+    [:div.centre [:img#home-logo {:src image}]]))
 
 (defn small-logo []
   (let [light-mode? (re-frame/subscribe [::subs/light-mode?])
         image (clojure.string/join ["/img/ae-logo-" (if @light-mode? "dark-trans.png" "trans.png")])]
-    [:div.centre [:img {:src image :width 200 :max-width "100%"}]]))
+    [:div.centre [:img#other-logo {:src image}]]))
 
 (defn title []
   [:h1 "AlmostEducated"])
@@ -49,8 +49,8 @@
   [:div
    [:h2 [:a {:href "https://blog.almost.education"} "Blog"]]
    [:h2 [:a {:href "https://github.com/educatedalmost"} "Software"]]
-   [:h2 [:a {:on-click #(re-frame/dispatch [::events/navigate :tutoring])} "Tutoring"]]
-   [:h2 [:a {:on-click #(re-frame/dispatch [::events/navigate :about])} "About"]]])
+   [:h2 [:a {:href "tutoring" :on-click #(re-frame/dispatch [::events/navigate :tutoring])} "Tutoring"]]
+   [:h2 [:a {:href "about" :on-click #(re-frame/dispatch [::events/navigate :about])} "About"]]])
 
 (defn home-panel []
   [re-com/v-box
@@ -101,7 +101,7 @@
   [:h2 "About"])
 
 (defn link-to-home-page []
-  [:a {:on-click #(re-frame/dispatch [::events/navigate :home])} "Home"]
+  [:a {:href "/" :on-click #(re-frame/dispatch [::events/navigate :home])} "Home"]
   #_[re-com/hyperlink
      :src      (at)
      :label    "go to Home Page"

@@ -21,13 +21,30 @@ a, a:visited, a:hover, a:active {
 }
 
 .centre {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 }
 
+#home-logo {
+    width: 400px;
+    max-width: 50%;
+}
+
+/* @media (max-width: 600px) { */
+/*     #home-logo { */
+/*         width: 200px; */
+/*         max-width: 100%; */
+/*     } */
+/* } */
+
+#other-logo {
+    width: 200px;
+    max-width: 50%;
+}
+
 #toggle {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .react-toggle--checked .react-toggle-track {
@@ -53,7 +70,7 @@ a, a:visited, a:hover, a:active {
 }
 
 #header-padding {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 path {
