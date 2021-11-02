@@ -1,0 +1,369 @@
+* æ/almost.education
+
+A [[https://github.com/day8/re-frame][re-frame]] application designed to ... well, that part is up to you.
+
+** Getting Started
+
+*** Project Overview
+
+- Architecture:
+  [[https://en.wikipedia.org/wiki/Single-page_application][Single Page
+  Application (SPA)]]
+- Languages
+
+  - Front end is [[https://clojurescript.org/][ClojureScript]] with
+    ([[https://github.com/day8/re-frame][re-frame]])
+  - CSS compilation is [[https://github.com/noprompt/garden][Garden]]
+    with [[https://github.com/dhleong/spade][Spade]]
+
+- Dependencies
+
+  - UI framework: [[https://github.com/day8/re-frame][re-frame]]
+    ([[https://github.com/day8/re-frame/blob/master/docs/README.md][docs]],
+    [[https://github.com/day8/re-frame/blob/master/docs/FAQs/README.md][FAQs]])
+    -> [[https://github.com/reagent-project/reagent][Reagent]] ->
+    [[https://github.com/facebook/react][React]]
+  - Client-side routing: [[https://github.com/juxt/bidi][bidi]] and
+    [[https://github.com/kibu-australia/pushy][pushy]]
+  - CSS rendering: [[https://github.com/noprompt/garden][Garden]]
+  - UI components: [[https://github.com/day8/re-com][re-com]]
+
+- Build tools
+
+  - CLJS compilation, dependency management, REPL, & hot reload:
+    [[https://github.com/thheller/shadow-cljs][=shadow-cljs=]]
+  - Test framework:
+    [[https://clojurescript.org/tools/testing][cljs.test]]
+  - Test runner: [[https://github.com/karma-runner/karma][Karma]]
+
+- Development tools
+
+  - Debugging: [[https://github.com/binaryage/cljs-devtools][CLJS
+    DevTools]], [[https://github.com/day8/re-frame-10x][=re-frame-10x=]]
+  - Emacs integration: [[https://github.com/clojure-emacs/cider][CIDER]]
+
+**** Directory structure
+     :PROPERTIES:
+     :CUSTOM_ID: directory-structure
+     :END:
+
+- [[/../../][=/=]]: project config files
+- [[file:dev/][=dev/=]]: source files compiled only with the
+  [[#running-the-app][dev]] profile
+
+  - [[file:dev/cljs/user.cljs][=user.cljs=]]: symbols for use during
+    development in the
+    [[#connecting-to-the-browser-repl-from-a-terminal][ClojureScript
+    REPL]]
+
+- [[file:resources/public/][=resources/public/=]]: SPA root directory;
+  [[#running-the-app][dev]] / [[#production][prod]] profile depends on
+  the most recent build
+
+  - [[file:resources/public/vendor/][=vendor/=]]: UI component CSS,
+    fonts, and images ([[https://github.com/day8/re-com][re-com]])
+  - [[file:resources/public/index.html][=index.html=]]: SPA home page
+
+    - Dynamic SPA content rendered in the following =div=:
+      =html     <div id="app"></div>=
+    - Customizable; add headers, footers, links to other scripts and
+      styles, etc.
+
+  - Generated directories and files
+
+    - Created on build with either the [[#running-the-app][dev]] or
+      [[#production][prod]] profile
+    - =js/compiled/=: compiled CLJS (=shadow-cljs=)
+
+      - Not tracked in source control; see
+        [[file:.gitignore][=.gitignore=]]
+
+- [[file:src/ae/almost_education/styles.cljs][=src/ae/almost_education/styles.cljs=]]:
+  CSS compilation source file (ClojureScript,
+  [[https://github.com/noprompt/garden][Garden]])
+- [[file:src/ae/almost_education/][=src/ae/almost_education/=]]: SPA
+  source files (ClojureScript,
+  [[https://github.com/Day8/re-frame][re-frame]])
+
+  - [[file:src/ae/almost_education/core.cljs][=core.cljs=]]: contains
+    the SPA entry point, =init=
+
+- [[file:test/ae/almost_education/][=test/ae/almost_education/=]]: test
+  files (ClojureScript,
+  [[https://clojurescript.org/tools/testing][cljs.test]])
+
+  - Only namespaces ending in =-test= (files =*_test.cljs=) are compiled
+    and sent to the test runner
+
+*** Editor/IDE
+    :PROPERTIES:
+    :CUSTOM_ID: editoride
+    :END:
+
+Use your preferred editor or IDE that supports Clojure/ClojureScript
+development. See
+[[https://clojure.org/community/resources#_clojure_tools][Clojure
+tools]] for some popular options.
+
+*** Environment Setup
+    :PROPERTIES:
+    :CUSTOM_ID: environment-setup
+    :END:
+
+1. Install [[https://openjdk.java.net/install/][JDK 8 or later]] (Java
+   Development Kit)
+2. Install [[https://nodejs.org/][Node.js]] (JavaScript runtime
+   environment) which should include
+   [[https://docs.npmjs.com/cli/npm][NPM]] or if your Node.js
+   installation does not include NPM also install it.
+3. Install [[https://www.google.com/chrome/][Chrome]] or
+   [[https://www.chromium.org/getting-involved/download-chromium][Chromium]]
+   version 59 or later (headless test environment)
+
+   - For Chromium, set the =CHROME_BIN= environment variable in your
+     shell to the command that launches Chromium. For example, in
+     Ubuntu, add the following line to your =.bashrc=:
+     =bash      export CHROME_BIN=chromium-browser=
+
+4. Clone this repo and open a terminal in the =ae/almost-education=
+   project root directory
+
+*** Browser Setup
+    :PROPERTIES:
+    :CUSTOM_ID: browser-setup
+    :END:
+
+Browser caching should be disabled when developer tools are open to
+prevent interference with
+[[https://github.com/thheller/shadow-cljs][=shadow-cljs=]] hot
+reloading.
+
+Custom formatters must be enabled in the browser before
+[[https://github.com/binaryage/cljs-devtools][CLJS DevTools]] can
+display ClojureScript data in the console in a more readable way.
+
+**** Chrome/Chromium
+     :PROPERTIES:
+     :CUSTOM_ID: chromechromium
+     :END:
+
+1. Open
+   [[https://developers.google.com/web/tools/chrome-devtools/][DevTools]]
+   (Linux/Windows: =F12= or =Ctrl-Shift-I=; macOS: =⌘-Option-I=)
+2. Open DevTools Settings (Linux/Windows: =?= or =F1=; macOS: =?= or
+   =Fn+F1=)
+3. Select =Preferences= in the navigation menu on the left, if it is not
+   already selected
+4. Under the =Network= heading, enable the
+   =Disable cache (while DevTools is open)= option
+5. Under the =Console= heading, enable the =Enable custom formatters=
+   option
+
+**** Firefox
+     :PROPERTIES:
+     :CUSTOM_ID: firefox
+     :END:
+
+1. Open [[https://developer.mozilla.org/en-US/docs/Tools][Developer
+   Tools]] (Linux/Windows: =F12= or =Ctrl-Shift-I=; macOS: =⌘-Option-I=)
+2. Open
+   [[https://developer.mozilla.org/en-US/docs/Tools/Settings][Developer
+   Tools Settings]] (Linux/macOS/Windows: =F1=)
+3. Under the =Advanced settings= heading, enable the
+   =Disable HTTP Cache (when toolbox is open)= option
+
+Unfortunately, Firefox does not yet support custom formatters in their
+devtools. For updates, follow the enhancement request in their bug
+tracker:
+[[https://bugzilla.mozilla.org/show_bug.cgi?id=1262914][1262914 - Add
+support for Custom Formatters in devtools]].
+
+** Development
+   :PROPERTIES:
+   :CUSTOM_ID: development
+   :END:
+
+*** Running the App
+    :PROPERTIES:
+    :CUSTOM_ID: running-the-app
+    :END:
+
+Start a temporary local web server, build the app with the =dev=
+profile, and serve the app, browser test runner and karma test runner
+with hot reload:
+
+#+BEGIN_SRC sh
+  npm install
+  npx shadow-cljs watch app
+#+END_SRC
+
+Please be patient; it may take over 20 seconds to see any output, and
+over 40 seconds to complete.
+
+When =[:app] Build completed= appears in the output, browse to
+[[http://localhost:8280/]].
+
+[[https://github.com/thheller/shadow-cljs][=shadow-cljs=]] will
+automatically push ClojureScript code changes to your browser on save.
+To prevent a few common issues, see
+[[https://code.thheller.com/blog/shadow-cljs/2019/08/25/hot-reload-in-clojurescript.html#things-to-avoid][Hot
+Reload in ClojureScript: Things to avoid]].
+
+Opening the app in your browser starts a
+[[https://clojurescript.org/reference/repl#using-the-browser-as-an-evaluation-environment][ClojureScript
+browser REPL]], to which you may now connect.
+
+**** Connecting to the browser REPL from Emacs with CIDER
+     :PROPERTIES:
+     :CUSTOM_ID: connecting-to-the-browser-repl-from-emacs-with-cider
+     :END:
+
+Connect to the browser REPL:
+
+#+BEGIN_EXAMPLE
+  M-x cider-jack-in-cljs
+#+END_EXAMPLE
+
+See [[https://shadow-cljs.github.io/docs/UsersGuide.html#cider][Shadow
+CLJS User's Guide: Emacs/CIDER]] for more information. Note that the
+mentioned [[file:.dir-locals.el][=.dir-locals.el=]] file has already
+been created for you.
+
+**** Connecting to the browser REPL from VS Code with Calva
+     :PROPERTIES:
+     :CUSTOM_ID: connecting-to-the-browser-repl-from-vs-code-with-calva
+     :END:
+
+See the [[https://github.com/day8/re-frame-template][re-frame-template
+README]] for [[https://github.com/BetterThanTomorrow/calva][Calva]]
+instuctions. See also https://calva.io for Calva documentation.
+
+**** Connecting to the browser REPL from other editors
+     :PROPERTIES:
+     :CUSTOM_ID: connecting-to-the-browser-repl-from-other-editors
+     :END:
+
+See
+[[https://shadow-cljs.github.io/docs/UsersGuide.html#_editor_integration][Shadow
+CLJS User's Guide: Editor Integration]]. Note that =npm run watch= runs
+=npx shadow-cljs watch= for you, and that this project's running build
+ids is =app=, =browser-test=, =karma-test=, or the keywords =:app=,
+=:browser-test=, =:karma-test= in a Clojure context.
+
+Alternatively, search the web for info on connecting to a =shadow-cljs=
+ClojureScript browser REPL from your editor and configuration.
+
+For example, in Vim / Neovim with =fireplace.vim= 1. Open a =.cljs= file
+in the project to activate =fireplace.vim= 2. In normal mode, execute
+the =Piggieback= command with this project's running build id, =:app=:
+=vim     :Piggieback :app=
+
+**** Connecting to the browser REPL from a terminal
+     :PROPERTIES:
+     :CUSTOM_ID: connecting-to-the-browser-repl-from-a-terminal
+     :END:
+
+1. Connect to the =shadow-cljs= nREPL:
+   =sh     lein repl :connect localhost:8777= The REPL prompt,
+   =shadow.user=>=, indicates that is a Clojure REPL, not ClojureScript.
+
+2. In the REPL, switch the session to this project's running build id,
+   =:app=: =clj     (shadow.cljs.devtools.api/nrepl-select :app)= The
+   REPL prompt changes to =cljs.user=>=, indicating that this is now a
+   ClojureScript REPL.
+
+3. See [[file:dev/cljs/user.cljs][=user.cljs=]] for symbols that are
+   immediately accessible in the REPL without needing to =require=.
+
+*** Running Tests
+    :PROPERTIES:
+    :CUSTOM_ID: running-tests
+    :END:
+
+Build the app with the =prod= profile, start a temporary local web
+server, launch headless Chrome/Chromium, run tests, and stop the web
+server:
+
+#+BEGIN_SRC sh
+  npm install
+  npm run ci
+#+END_SRC
+
+Please be patient; it may take over 15 seconds to see any output, and
+over 25 seconds to complete.
+
+Or, for auto-reload:
+
+#+BEGIN_SRC sh
+  npm install
+  npm run watch
+#+END_SRC
+
+Then in another terminal:
+
+#+BEGIN_SRC sh
+  karma start
+#+END_SRC
+
+*** Running =shadow-cljs= Actions
+    :PROPERTIES:
+    :CUSTOM_ID: running-shadow-cljs-actions
+    :END:
+
+See a list of
+[[https://shadow-cljs.github.io/docs/UsersGuide.html#_command_line][=shadow-cljs CLI=]]
+actions:
+
+#+BEGIN_SRC sh
+  npx shadow-cljs --help
+#+END_SRC
+
+Please be patient; it may take over 10 seconds to see any output. Also
+note that some actions shown may not actually be supported, outputting
+"Unknown action." when run.
+
+Run a shadow-cljs action on this project's build id (without the colon,
+just =app=):
+
+#+BEGIN_SRC sh
+  npx shadow-cljs <action> app
+#+END_SRC
+
+*** Debug Logging
+    :PROPERTIES:
+    :CUSTOM_ID: debug-logging
+    :END:
+
+The =debug?= variable in
+[[file:src/cljs/ae/almost_education/config.cljs][=config.cljs=]]
+defaults to =true= in [[#running-the-app][=dev=]] builds, and =false= in
+[[#production][=prod=]] builds.
+
+Use =debug?= for logging or other tasks that should run only on =dev=
+builds:
+
+#+BEGIN_EXAMPLE
+  (ns ae.almost-education.example
+    (:require [ae.almost-education.config :as config])
+
+  (when config/debug?
+    (println "This message will appear in the browser console only on dev builds."))
+#+END_EXAMPLE
+
+** Production
+   :PROPERTIES:
+   :CUSTOM_ID: production
+   :END:
+
+Build the app with the =prod= profile:
+
+#+BEGIN_SRC sh
+  npm install
+  npm run release
+#+END_SRC
+
+Please be patient; it may take over 15 seconds to see any output, and
+over 30 seconds to complete.
+
+The =resources/public/js/compiled= directory is created, containing the
+compiled =app.js= and =manifest.edn= files.
