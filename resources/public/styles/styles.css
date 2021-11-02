@@ -42,6 +42,16 @@ a, a:visited, a:hover, a:active {
     max-width: 50%;
 }
 
+.home-link {
+  font-size: 20px;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 20px;
+}
+
 #toggle {
     margin-top: 5px;
     margin-bottom: 5px;
